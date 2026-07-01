@@ -1,30 +1,63 @@
-import { prisma } from "@doora/database";
+import { prisma, Prisma } from "@doora/database";
+import type { PrismaClient } from "@doora/database";
 import { toPublicUser } from "./users";
 
-export async function getOrCreateDirectConversation(userId: string, otherUserId: string) {
-  const existing = await prisma.conversation.findFirst({
+type DbClient = PrismaClient | Prisma.TransactionClient;
+
+async function findDirectConversationId(
+  userId: string,
+  otherUserId: string,
+  db: DbClient = prisma,
+) {
+  const membership = await db.conversationMember.findFirst({
     where: {
-      type: "direct",
-      AND: [
-        { members: { some: { userId } } },
-        { members: { some: { userId: otherUserId } } },
-      ],
-    },
-    select: { id: true },
-  });
-
-  if (existing) return existing.id;
-
-  const conversation = await prisma.conversation.create({
-    data: {
-      type: "direct",
-      members: {
-        create: [{ userId }, { userId: otherUserId }],
+      userId,
+      conversation: {
+        type: "direct",
+        members: { some: { userId: otherUserId } },
       },
     },
+    select: { conversationId: true },
   });
 
-  return conversation.id;
+  return membership?.conversationId ?? null;
+}
+
+export async function getOrCreateDirectConversation(userId: string, otherUserId: string) {
+  if (userId === otherUserId) {
+    throw new Error("Cannot create a conversation with yourself");
+  }
+
+  const existingId = await findDirectConversationId(userId, otherUserId);
+  if (existingId) return existingId;
+
+  try {
+    const conversation = await prisma.$transaction(async (tx) => {
+      const again = await findDirectConversationId(userId, otherUserId, tx);
+      if (again) return { id: again };
+
+      return tx.conversation.create({
+        data: {
+          type: "direct",
+          members: {
+            create: [{ userId }, { userId: otherUserId }],
+          },
+        },
+        select: { id: true },
+      });
+    });
+
+    return conversation.id;
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    ) {
+      const raced = await findDirectConversationId(userId, otherUserId);
+      if (raced) return raced;
+    }
+    throw error;
+  }
 }
 
 export async function getConversationParticipants(conversationId: string, excludeUserId: string) {

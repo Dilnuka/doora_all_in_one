@@ -102,6 +102,48 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model EmailOtp {
+  id        String    @id @default(cuid())
+  email     String
+  codeHash  String
+  purpose   String    @default("login")
+  expiresAt DateTime
+  usedAt    DateTime?
+  attempts  Int       @default(0)
+  createdAt DateTime  @default(now())
+
+  @@index([email, purpose, createdAt])
+}
+
+model EmailLog {
+  id        String   @id @default(cuid())
+  to        String
+  subject   String
+  type      String
+  status    String
+  provider  String?
+  messageId String?
+  error     String?
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  @@index([to, createdAt])
+  @@index([type, createdAt])
+  @@index([status, createdAt])
+}
+
+model PendingSignup {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         Role     @default(RESIDENT)
+  tower        String?
+  apartment    String?
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+}
+
 // ─── Food ────────────────────────────────────────────────────────────────
 
 model Cafeteria {

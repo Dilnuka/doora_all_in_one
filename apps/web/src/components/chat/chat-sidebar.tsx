@@ -28,6 +28,7 @@ export function ChatSidebar({
   onAddContact,
   connected,
   totalUnread,
+  openingContactId,
 }: {
   user: {
     displayName: string;
@@ -43,6 +44,7 @@ export function ChatSidebar({
   onAddContact: () => void;
   connected: boolean;
   totalUnread: number;
+  openingContactId?: string | null;
 }) {
   const [tab, setTab] = useState<"chats" | "contacts">("chats");
   const [search, setSearch] = useState("");
@@ -172,7 +174,8 @@ export function ChatSidebar({
               <button
                 key={contact.id}
                 onClick={() => onStartChat(contact)}
-                className="flex w-full items-center gap-3 border-b border-slate-700/30 p-4 text-left hover:bg-slate-700/20"
+                disabled={openingContactId === contact.id}
+                className="flex w-full items-center gap-3 border-b border-slate-700/30 p-4 text-left hover:bg-slate-700/20 disabled:cursor-wait disabled:opacity-60"
               >
                 <ChatAvatar
                   name={contact.displayName}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { chatApi, type Conversation, type PublicChatUser } from "@/lib/chat/api";
 import { useChatSocket } from "@/components/chat/chat-socket-provider";
@@ -22,6 +22,8 @@ export function ChatApp() {
   const [activeConversation, setActiveConversation] = useState<Conversation | null>(null);
   const [showAddContact, setShowAddContact] = useState(false);
   const [mobileChatOpen, setMobileChatOpen] = useState(false);
+  const [openingContactId, setOpeningContactId] = useState<string | null>(null);
+  const openingContactIdRef = useRef<string | null>(null);
 
   const user = session?.user;
   const webrtc = useWebRTC(socket, user?.id);
@@ -144,6 +146,24 @@ export function ChatApp() {
   }
 
   async function handleStartChat(contact: PublicChatUser) {
+    if (!user?.id) return;
+    if (contact.id === user.id) {
+      showToast("You cannot message yourself", "error");
+      return;
+    }
+
+    const existing = conversations.find((c) =>
+      c.type === "direct" && c.participants.some((p) => p.id === contact.id),
+    );
+    if (existing) {
+      handleSelectConversation(existing);
+      return;
+    }
+
+    if (openingContactIdRef.current === contact.id) return;
+
+    openingContactIdRef.current = contact.id;
+    setOpeningContactId(contact.id);
     try {
       const { conversation } = await chatApi.createDirectConversation(contact.id);
       setConversations((prev) => {
@@ -154,6 +174,11 @@ export function ChatApp() {
       setMobileChatOpen(true);
     } catch (err) {
       showToast(err instanceof Error ? err.message : "Could not open chat", "error");
+    } finally {
+      if (openingContactIdRef.current === contact.id) {
+        openingContactIdRef.current = null;
+      }
+      setOpeningContactId((current) => (current === contact.id ? null : current));
     }
   }
 
@@ -174,6 +199,7 @@ export function ChatApp() {
             onAddContact={() => setShowAddContact(true)}
             connected={connected}
             totalUnread={totalUnread}
+            openingContactId={openingContactId}
           />
         </div>
 

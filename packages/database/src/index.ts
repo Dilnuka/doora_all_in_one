@@ -4,7 +4,10 @@ import { createDatabasePool } from "./pg-pool";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
+  prismaSchemaVersion: string | undefined;
 };
+
+const PRISMA_SCHEMA_VERSION = "20260701140000_pending_signup";
 
 function createPrismaClient() {
   const pool = createDatabasePool();
@@ -12,7 +15,23 @@ function createPrismaClient() {
   return new PrismaClient({ adapter });
 }
 
-export const prisma = globalForPrisma.prisma ?? createPrismaClient();
+function getPrismaClient() {
+  if (
+    process.env.NODE_ENV !== "production" &&
+    globalForPrisma.prismaSchemaVersion !== PRISMA_SCHEMA_VERSION
+  ) {
+    globalForPrisma.prisma = undefined;
+    globalForPrisma.prismaSchemaVersion = PRISMA_SCHEMA_VERSION;
+  }
+
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = createPrismaClient();
+  }
+
+  return globalForPrisma.prisma;
+}
+
+export const prisma = getPrismaClient();
 
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;

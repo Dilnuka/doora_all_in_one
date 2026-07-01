@@ -16,6 +16,9 @@ export async function POST(request: Request) {
   if (!otherUserId) {
     return NextResponse.json({ error: "userId is required" }, { status: 400 });
   }
+  if (otherUserId === session.user.id) {
+    return NextResponse.json({ error: "Cannot message yourself" }, { status: 400 });
+  }
 
   const other = await prisma.user.findUnique({ where: { id: otherUserId } });
   if (!other) {

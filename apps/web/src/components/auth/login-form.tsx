@@ -6,6 +6,7 @@ import { loginAction, type AuthState } from "@/actions/auth";
 import { DEV_MOCK_USERS, DEV_SKIP_PASSWORD } from "@/lib/dev-auth";
 
 const initialState: AuthState = {};
+
 const devSkipEnabled = process.env.NEXT_PUBLIC_DEV_SKIP_AUTH === "true";
 
 export function LoginForm({ callbackUrl }: { callbackUrl?: string }) {

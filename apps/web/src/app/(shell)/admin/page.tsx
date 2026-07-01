@@ -16,12 +16,14 @@ export default async function AdminPage() {
           <p className="text-sm text-indigo-600">{user.role}</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white p-5">
-          <p className="text-sm text-slate-500">Modules</p>
+          <p className="text-sm text-slate-500">Auth & email</p>
           <ul className="mt-2 space-y-1 text-sm text-slate-700">
-            <li>Food — pending port</li>
-            <li>Chat — pending port</li>
-            <li>IoT — pending port</li>
-            <li>Doora AI — pending port</li>
+            <li>OTP email verification on signup</li>
+            <li>
+              <a href="/admin/emails" className="text-indigo-600 hover:underline">
+                View email delivery logs
+              </a>
+            </li>
           </ul>
         </div>
       </div>
