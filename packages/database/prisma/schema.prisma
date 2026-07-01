@@ -1,0 +1,275 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────
+
+enum Role {
+  RESIDENT
+  CAFETERIA
+  GUEST
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PREPARING
+  READY
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum DeliveryType {
+  DELIVERY
+  PICKUP
+}
+
+// ─── Core / Auth ─────────────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  username      String?   @unique
+  role          Role      @default(RESIDENT)
+  tower         String?
+  apartment     String?
+  roomId        String?   @unique
+  cafeteriaId   String?
+  avatarColor   String    @default("#6366f1")
+  avatarId      String?
+  status        String    @default("offline")
+  statusMessage String    @default("")
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  room       Room?       @relation(fields: [roomId], references: [id])
+  cafeteria  Cafeteria?  @relation(fields: [cafeteriaId], references: [id])
+  orders     Order[]
+  routines   SmartRoutine[]
+  accounts   Account[]
+  sessions   Session[]
+
+  contactsOwned    Contact[]            @relation("ContactOwner")
+  contactsOf       Contact[]            @relation("ContactTarget")
+  conversationMembers ConversationMember[]
+  messagesSent     Message[]
+  messageReads     MessageRead[]
+  agentConversations AgentConversation[]
+  agentActionLogs  AgentActionLog[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ─── Food ────────────────────────────────────────────────────────────────
+
+model Cafeteria {
+  id          String     @id @default(cuid())
+  name        String
+  description String
+  imageUrl    String
+  isOpen      Boolean    @default(true)
+  rating      Float      @default(4.5)
+  cuisine     String
+  menuItems   MenuItem[]
+  orders      Order[]
+  staff       User[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model MenuItem {
+  id          String      @id @default(cuid())
+  cafeteriaId String
+  cafeteria   Cafeteria   @relation(fields: [cafeteriaId], references: [id], onDelete: Cascade)
+  name        String
+  description String
+  price       Float
+  imageUrl    String
+  category    String
+  isAvailable Boolean     @default(true)
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Order {
+  id           String       @id @default(cuid())
+  residentId   String
+  resident     User         @relation(fields: [residentId], references: [id])
+  cafeteriaId  String
+  cafeteria    Cafeteria    @relation(fields: [cafeteriaId], references: [id])
+  status       OrderStatus  @default(PENDING)
+  total        Float
+  deliveryType DeliveryType @default(DELIVERY)
+  tower        String?
+  apartment    String?
+  note         String?
+  items        OrderItem[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model OrderItem {
+  id         String    @id @default(cuid())
+  orderId    String
+  order      Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItemId String?
+  menuItem   MenuItem? @relation(fields: [menuItemId], references: [id], onDelete: SetNull)
+  name       String
+  price      Float
+  quantity   Int
+}
+
+// ─── Chat ────────────────────────────────────────────────────────────────
+
+model Contact {
+  id        String   @id @default(cuid())
+  userId    String
+  contactId String
+  user      User     @relation("ContactOwner", fields: [userId], references: [id], onDelete: Cascade)
+  contact   User     @relation("ContactTarget", fields: [contactId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, contactId])
+}
+
+model Conversation {
+  id        String               @id @default(cuid())
+  type      String               @default("direct")
+  name      String?
+  members   ConversationMember[]
+  messages  Message[]
+  createdAt DateTime             @default(now())
+}
+
+model ConversationMember {
+  conversationId String
+  userId         String
+  joinedAt       DateTime     @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([conversationId, userId])
+}
+
+model Message {
+  id             String        @id @default(cuid())
+  conversationId String
+  senderId       String
+  content        String
+  createdAt      DateTime      @default(now())
+  conversation   Conversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         User          @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  reads          MessageRead[]
+}
+
+model MessageRead {
+  messageId String
+  userId    String
+  readAt    DateTime @default(now())
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([messageId, userId])
+}
+
+// ─── IoT ─────────────────────────────────────────────────────────────────
+
+model Room {
+  id    String @id @default(cuid())
+  code  String @unique
+  name  String
+  state Json?
+  user  User?
+}
+
+model SmartRoutine {
+  id            String   @id @default(cuid())
+  userId        String
+  triggerPhrase String
+  actions       Json
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Doora Agent ─────────────────────────────────────────────────────────
+
+model AgentConversation {
+  id        String         @id @default(cuid())
+  userId    String
+  platform  String         @default("portal")
+  title     String?
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  AgentMessage[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model AgentMessage {
+  id             String            @id @default(cuid())
+  conversationId String
+  role           String
+  content        String            @db.Text
+  toolCalls      Json?
+  model          String?
+  tokensUsed     Int?
+  conversation   AgentConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime          @default(now())
+}
+
+model AgentActionLog {
+  id             String   @id @default(cuid())
+  userId         String
+  toolName       String
+  toolArgs       Json
+  status         String
+  result         Json?
+  errorMessage   String?
+  idempotencyKey String?  @unique
+  durationMs     Int?
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime @default(now())
+}

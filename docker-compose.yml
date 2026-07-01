@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: doora
+      POSTGRES_PASSWORD: doora_dev_password
+      POSTGRES_DB: doora_platform
+    volumes:
+      - doora_pg_data:/var/lib/postgresql/data
+
+volumes:
+  doora_pg_data:

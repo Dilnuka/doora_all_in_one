@@ -1,0 +1,21 @@
+{
+  "name": "doora-platform",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@doora/web",
+    "dev:realtime": "npm run dev --workspace=@doora/realtime",
+    "build": "npm run build --workspace=@doora/web",
+    "vercel-build": "npm run db:generate && npm run build --workspace=@doora/web",
+    "start:realtime": "npm run start --workspace=@doora/realtime",
+    "db:generate": "npm run generate --workspace=@doora/database",
+    "db:migrate": "npm run migrate --workspace=@doora/database",
+    "db:deploy": "npm run migrate:deploy --workspace=@doora/database",
+    "db:seed": "npm run seed --workspace=@doora/database",
+    "db:studio": "npm run studio --workspace=@doora/database"
+  }
+}

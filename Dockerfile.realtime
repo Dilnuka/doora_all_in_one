@@ -1,0 +1,26 @@
+# Realtime server (Socket.io) — build context: doora-platform repo root
+
+FROM node:20-alpine
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+COPY apps/realtime/package.json ./apps/realtime/
+COPY packages/database/package.json ./packages/database/
+
+RUN npm ci
+
+COPY packages/database ./packages/database
+COPY apps/realtime ./apps/realtime
+
+RUN npm run db:generate --workspace=@doora/database
+
+WORKDIR /app/apps/realtime
+
+ENV NODE_ENV=production
+
+EXPOSE 3001
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD node -e "fetch('http://127.0.0.1:'+(process.env.PORT||3001)+'/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+
+CMD ["npm", "run", "start"]
