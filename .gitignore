@@ -1,11 +1,23 @@
+# Dependencies & build output
 node_modules
 .next
-.env
-.env.local
-.env*.local
-packages/database/.env
-apps/realtime/.env
-apps/web/.env.local
 dist
+out
+.turbo
+*.tsbuildinfo
+
+# Logs & OS
 *.log
 .DS_Store
+
+# Environment — never commit secrets (only *.example templates are tracked)
+.env
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+**/.env.*.local
+!.env.example
+!.env.*.example
+!**/.env.example
+!**/.env.*.example
