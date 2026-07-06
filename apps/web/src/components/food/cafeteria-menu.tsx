@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Plus, Star } from "lucide-react";
+import { FoodImage } from "@/components/food/food-image";
 import { useCartStore } from "@/store/food/cart";
 import { useToast } from "@/components/providers/toast-provider";
 import { Button } from "@/components/ui/button";
@@ -52,7 +53,7 @@ export function CafeteriaMenu({ cafeteria }: { cafeteria: Cafeteria }) {
     <div>
       <Link
         href="/food"
-        className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-orange-600"
+        className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-doora-orange"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to cafeterias
@@ -95,17 +96,17 @@ export function CafeteriaMenu({ cafeteria }: { cafeteria: Cafeteria }) {
       <div className="space-y-10">
         {categories.map((category) => (
           <section key={category}>
-            <h2 className="mb-4 text-xl font-semibold text-slate-900">{category}</h2>
+            <h2 className="mb-4 text-xl font-semibold text-doora-navy">{category}</h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {cafeteria.menuItems
                 .filter((item) => item.category === category)
                 .map((item) => (
                   <div
                     key={item.id}
-                    className="flex gap-4 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm"
+                    className="flex gap-4 rounded-2xl border border-doora-border bg-doora-surface-card p-4 shadow-sm transition hover:border-doora-orange/30 hover:shadow-md"
                   >
                     <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl">
-                      <Image
+                      <FoodImage
                         src={item.imageUrl}
                         alt={item.name}
                         fill
@@ -114,10 +115,10 @@ export function CafeteriaMenu({ cafeteria }: { cafeteria: Cafeteria }) {
                       />
                     </div>
                     <div className="flex flex-1 flex-col">
-                      <h3 className="font-semibold text-slate-900">{item.name}</h3>
+                      <h3 className="font-semibold text-doora-navy">{item.name}</h3>
                       <p className="mt-1 line-clamp-2 text-sm text-slate-500">{item.description}</p>
                       <div className="mt-auto flex items-center justify-between pt-3">
-                        <span className="font-semibold text-orange-600">
+                        <span className="font-semibold text-doora-orange">
                           {formatCurrency(item.price)}
                         </span>
                         <Button

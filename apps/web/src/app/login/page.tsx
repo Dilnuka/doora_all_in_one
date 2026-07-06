@@ -8,7 +8,7 @@ export default async function LoginPage({
   const params = await searchParams;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-slate-50 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-doora-orange-soft via-white to-doora-surface px-4">
       <LoginForm callbackUrl={params.callbackUrl} />
     </div>
   );

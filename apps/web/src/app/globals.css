@@ -1,16 +1,56 @@
 @import "tailwindcss";
 
+/*
+ * Doora brand palette — Orange & Navy (60-30-10)
+ * Navy: trust, structure, navigation (≈30%)
+ * Warm surfaces: content canvas (≈60%)
+ * Orange: CTAs, active states, conversion (≈10%)
+ * Ref: complementary orange + navy for e-commerce + unified platforms
+ */
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --sidebar: #0f172a;
-  --sidebar-fg: #e2e8f0;
-  --accent: #6366f1;
+  --doora-navy: #2c3e50;
+  --doora-navy-dark: #1a252f;
+  --doora-navy-light: #34495e;
+  --doora-navy-muted: #4a6278;
+
+  --doora-orange: #e67e22;
+  --doora-orange-dark: #d35400;
+  --doora-orange-soft: #fdf2e9;
+
+  --doora-surface: #f4f7fa;
+  --doora-surface-card: #ffffff;
+  --doora-border: #dce4ec;
+
+  --doora-success: #27ae60;
+  --doora-success-soft: #e8f8f0;
+
+  --background: var(--doora-surface);
+  --foreground: var(--doora-navy-dark);
+  --sidebar: var(--doora-navy);
+  --sidebar-fg: #e8eef4;
+  --accent: var(--doora-orange);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-doora-navy: #2c3e50;
+  --color-doora-navy-dark: #1a252f;
+  --color-doora-navy-light: #34495e;
+  --color-doora-navy-muted: #4a6278;
+
+  --color-doora-orange: #e67e22;
+  --color-doora-orange-dark: #d35400;
+  --color-doora-orange-soft: #fdf2e9;
+
+  --color-doora-surface: #f4f7fa;
+  --color-doora-surface-card: #ffffff;
+  --color-doora-border: #dce4ec;
+
+  --color-doora-success: #27ae60;
+  --color-doora-success-soft: #e8f8f0;
+
   --font-sans: var(--font-geist-sans);
 }
 
@@ -18,4 +58,17 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Shared focus ring for auth / form inputs */
+.doora-input {
+  @apply w-full rounded-lg border border-doora-border bg-doora-surface-card px-3 py-2 text-sm text-doora-navy-dark outline-none focus:border-doora-orange focus:ring-2 focus:ring-doora-orange-soft;
+}
+
+.doora-btn-primary {
+  @apply rounded-lg bg-doora-orange px-4 py-2.5 text-sm font-medium text-white transition hover:bg-doora-orange-dark disabled:opacity-60;
+}
+
+.doora-link {
+  @apply font-medium text-doora-orange hover:underline;
 }

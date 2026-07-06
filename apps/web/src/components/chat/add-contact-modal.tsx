@@ -57,10 +57,10 @@ export function AddContactModal({
       onClick={onClose}
     >
       <div
-        className="flex max-h-[90dvh] w-full max-w-md flex-col rounded-t-2xl border border-slate-700/50 bg-slate-800 sm:rounded-2xl"
+        className="flex max-h-[90dvh] w-full max-w-md flex-col rounded-t-2xl border border-doora-navy-light/50 bg-doora-navy sm:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex shrink-0 items-center justify-between border-b border-slate-700/50 p-4">
+        <div className="flex shrink-0 items-center justify-between border-b border-doora-navy-light/50 p-4">
           <h2 className="text-lg font-semibold text-white">Add contact</h2>
           <button onClick={onClose} className="text-slate-400 hover:text-white">
             <X className="h-5 w-5" />
@@ -73,7 +73,7 @@ export function AddContactModal({
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search by username or name..."
             autoFocus
-            className="w-full rounded-xl border border-slate-600/50 bg-slate-900 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+            className="w-full rounded-xl border border-doora-navy-light/50 bg-doora-navy-dark px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-doora-orange/50"
           />
           {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
           <div className="mt-4 max-h-64 space-y-1 overflow-y-auto">
@@ -84,7 +84,7 @@ export function AddContactModal({
             {results.map((user) => (
               <div
                 key={user.id}
-                className="flex items-center gap-3 rounded-xl p-3 hover:bg-slate-700/30"
+                className="flex items-center gap-3 rounded-xl p-3 hover:bg-doora-navy-light/30"
               >
                 <ChatAvatar
                   name={user.displayName}
@@ -99,7 +99,7 @@ export function AddContactModal({
                 <button
                   onClick={() => handleAdd(user)}
                   disabled={adding === user.id}
-                  className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+                  className="rounded-lg bg-doora-orange px-3 py-1.5 text-sm font-medium text-white hover:bg-doora-orange-dark disabled:opacity-50"
                 >
                   {adding === user.id ? "Adding..." : "Add"}
                 </button>

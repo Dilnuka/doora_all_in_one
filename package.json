@@ -16,6 +16,7 @@
     "db:migrate": "npm run migrate --workspace=@doora/database",
     "db:deploy": "npm run migrate:deploy --workspace=@doora/database",
     "db:seed": "npm run seed --workspace=@doora/database",
+    "db:seed:food": "npm run seed:food --workspace=@doora/database",
     "db:studio": "npm run studio --workspace=@doora/database"
   }
 }

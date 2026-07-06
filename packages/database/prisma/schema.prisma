@@ -42,7 +42,7 @@ model User {
   apartment     String?
   roomId        String?   @unique
   cafeteriaId   String?
-  avatarColor   String    @default("#6366f1")
+  avatarColor   String    @default("#E67E22")
   avatarId      String?
   status        String    @default("offline")
   statusMessage String    @default("")

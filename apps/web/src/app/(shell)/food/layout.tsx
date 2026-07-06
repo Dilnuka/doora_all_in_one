@@ -13,7 +13,7 @@ export default async function FoodLayout({ children }: { children: React.ReactNo
   return (
     <div className="flex min-h-full flex-col">
       <FoodHeader />
-      <div className="flex-1 p-6">{children}</div>
+      <div className="min-w-0 flex-1 p-6">{children}</div>
     </div>
   );
 }

@@ -3,17 +3,11 @@ import bcrypt from "bcryptjs";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
 import { createDatabasePool } from "../src/pg-pool";
+import { FOOD_CAFETERIAS } from "../src/food-seed-data";
 
 const pool = createDatabasePool();
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
-
-const spiceRouteMenu = [
-  { name: "Hyderabadi Biryani", description: "Aromatic basmati with tender chicken", price: 299, category: "Mains", imageUrl: "https://images.unsplash.com/photo-1563379091339-03246963d96a?w=400&q=80" },
-  { name: "Paneer Butter Masala", description: "Creamy tomato gravy with paneer", price: 249, category: "Mains", imageUrl: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&q=80" },
-  { name: "Masala Dosa", description: "Crispy dosa with potato filling", price: 129, category: "Breakfast", imageUrl: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&q=80" },
-  { name: "Mango Lassi", description: "Chilled yogurt mango drink", price: 79, category: "Drinks", imageUrl: "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&q=80" },
-];
 
 async function main() {
   await prisma.agentMessage.deleteMany();
@@ -44,17 +38,33 @@ async function main() {
     data: { code: "ADMIN-ROOM", name: "Admin Suite" },
   });
 
+  const spiceRoute = FOOD_CAFETERIAS[0];
+
   const cafeteria = await prisma.cafeteria.create({
     data: {
-      name: "Spice Route Cafe",
-      description: "Authentic Indian flavors — biryanis, curries, and street-style snacks.",
-      imageUrl: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80",
-      cuisine: "Indian",
-      rating: 4.8,
-      isOpen: true,
-      menuItems: { create: spiceRouteMenu },
+      name: spiceRoute.name,
+      description: spiceRoute.description,
+      imageUrl: spiceRoute.imageUrl,
+      cuisine: spiceRoute.cuisine,
+      rating: spiceRoute.rating,
+      isOpen: spiceRoute.isOpen,
+      menuItems: { create: spiceRoute.menuItems },
     },
   });
+
+  for (const cafe of FOOD_CAFETERIAS.slice(1)) {
+    await prisma.cafeteria.create({
+      data: {
+        name: cafe.name,
+        description: cafe.description,
+        imageUrl: cafe.imageUrl,
+        cuisine: cafe.cuisine,
+        rating: cafe.rating,
+        isOpen: cafe.isOpen,
+        menuItems: { create: cafe.menuItems },
+      },
+    });
+  }
 
   const resident = await prisma.user.create({
     data: {

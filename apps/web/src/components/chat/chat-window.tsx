@@ -164,7 +164,7 @@ export function ChatWindow({
 
   if (!conversation) {
     return (
-      <div className="hidden flex-1 flex-col items-center justify-center bg-slate-900 p-8 text-center md:flex">
+      <div className="hidden flex-1 flex-col items-center justify-center bg-doora-navy p-8 text-center md:flex">
         <MessageSquareIcon />
         <h2 className="mt-4 text-xl font-semibold text-white">Select a conversation</h2>
         <p className="mt-2 max-w-sm text-slate-400">
@@ -177,12 +177,12 @@ export function ChatWindow({
   let lastDate: string | null = null;
 
   return (
-    <div className="flex min-w-0 flex-1 flex-col bg-slate-900">
-      <div className="flex items-center gap-3 border-b border-slate-700/50 bg-slate-800/50 px-4 py-3">
+    <div className="flex min-w-0 flex-1 flex-col bg-doora-navy">
+      <div className="flex items-center gap-3 border-b border-doora-navy-light/50 bg-doora-navy-light/50 px-4 py-3">
         {showBackButton && onBack && (
           <button
             onClick={onBack}
-            className="rounded-xl p-2 text-slate-300 hover:bg-slate-700/50 md:hidden"
+            className="rounded-xl p-2 text-slate-300 hover:bg-doora-navy-light/50 md:hidden"
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
@@ -210,7 +210,7 @@ export function ChatWindow({
               onClick={() => onStartCall("audio")}
               disabled={!canCall}
               title={canCall ? "Voice call" : "Contact must be online"}
-              className="rounded-xl p-2 text-slate-300 hover:bg-slate-700/50 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-xl p-2 text-slate-300 hover:bg-doora-navy-light/50 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Phone className="h-5 w-5" />
             </button>
@@ -219,7 +219,7 @@ export function ChatWindow({
               onClick={() => onStartCall("video")}
               disabled={!canCall}
               title={canCall ? "Video call" : "Contact must be online"}
-              className="rounded-xl p-2 text-slate-300 hover:bg-slate-700/50 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-xl p-2 text-slate-300 hover:bg-doora-navy-light/50 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Video className="h-5 w-5" />
             </button>
@@ -230,7 +230,7 @@ export function ChatWindow({
       <div className="flex-1 space-y-1 overflow-y-auto px-4 py-3">
         {loading && messages.length === 0 && (
           <div className="flex justify-center py-8">
-            <div className="h-6 w-6 animate-spin rounded-full border-2 border-indigo-500 border-t-transparent" />
+            <div className="h-6 w-6 animate-spin rounded-full border-2 border-doora-orange border-t-transparent" />
           </div>
         )}
         {messages.map((msg) => {
@@ -253,13 +253,13 @@ export function ChatWindow({
                 <div
                   className={`max-w-[85%] rounded-2xl px-4 py-2 sm:max-w-[70%] ${
                     msg.isOwn
-                      ? "rounded-br-md bg-indigo-600 text-white"
-                      : "rounded-bl-md bg-slate-800 text-slate-100"
+                      ? "rounded-br-md bg-doora-orange text-white"
+                      : "rounded-bl-md bg-doora-navy-light text-slate-100"
                   } ${msg.pending ? "opacity-70" : ""}`}
                 >
                   <p className="text-sm leading-relaxed break-words">{msg.content}</p>
                   <p
-                    className={`mt-1 text-[10px] ${msg.isOwn ? "text-indigo-200" : "text-slate-500"}`}
+                    className={`mt-1 text-[10px] ${msg.isOwn ? "text-doora-orange/40" : "text-slate-500"}`}
                   >
                     {formatMessageTime(msg.createdAt)}
                     {msg.pending && " · Sending"}
@@ -280,7 +280,7 @@ export function ChatWindow({
 
       <form
         onSubmit={handleSend}
-        className="border-t border-slate-700/50 bg-slate-800/30 px-4 py-3"
+        className="border-t border-doora-navy-light/50 bg-doora-navy-light/30 px-4 py-3"
       >
         <div className="flex items-center gap-2">
           <input
@@ -289,12 +289,12 @@ export function ChatWindow({
             onChange={handleInputChange}
             placeholder="Type a message..."
             disabled={!connected}
-            className="flex-1 rounded-2xl border border-slate-600/50 bg-slate-900 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 disabled:opacity-60"
+            className="flex-1 rounded-2xl border border-doora-navy-light/50 bg-doora-navy px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-doora-orange/50 disabled:opacity-60"
           />
           <button
             type="submit"
             disabled={!input.trim() || !connected}
-            className="rounded-xl bg-indigo-600 p-2.5 text-white hover:bg-indigo-700 disabled:opacity-40"
+            className="rounded-xl bg-doora-orange p-2.5 text-white hover:bg-doora-orange-dark disabled:opacity-40"
           >
             <Send className="h-5 w-5" />
           </button>
@@ -306,8 +306,8 @@ export function ChatWindow({
 
 function MessageSquareIcon() {
   return (
-    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-indigo-500/10">
-      <svg className="h-10 w-10 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-doora-orange/10">
+      <svg className="h-10 w-10 text-doora-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"

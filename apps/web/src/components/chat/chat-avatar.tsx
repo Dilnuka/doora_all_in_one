@@ -37,7 +37,7 @@ export function ChatAvatar({ name, color, avatarId, size = "md", status }: Avata
       ) : (
         <div
           className={`${sizes[size]} flex items-center justify-center rounded-full font-semibold text-white`}
-          style={{ backgroundColor: color || "#6366f1" }}
+          style={{ backgroundColor: color || "#E67E22" }}
         >
           {initials}
         </div>

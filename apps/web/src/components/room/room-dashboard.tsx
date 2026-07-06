@@ -19,7 +19,7 @@ function Toggle({
   active,
   onClick,
   disabled,
-  color = "indigo",
+  color = "doora-orange",
 }: {
   label: string;
   icon: React.ReactNode;
@@ -40,18 +40,18 @@ function Toggle({
       }`}
       style={
         active
-          ? { borderColor: "rgba(99,102,241,0.5)", background: "rgba(99,102,241,0.1)" }
+          ? { borderColor: "rgba(230,126,34,0.5)", background: "rgba(230,126,34,0.1)" }
           : undefined
       }
     >
       <div className="mb-3 flex items-center justify-between">
         <div
-          className={`rounded-xl p-2 ${active ? "bg-indigo-600 text-white" : "bg-slate-700 text-slate-400"}`}
+          className={`rounded-xl p-2 ${active ? "bg-doora-orange text-white" : "bg-slate-700 text-slate-400"}`}
         >
           {icon}
         </div>
         <div
-          className={`h-6 w-11 rounded-full p-0.5 transition ${active ? "bg-indigo-600" : "bg-slate-600"}`}
+          className={`h-6 w-11 rounded-full p-0.5 transition ${active ? "bg-doora-orange" : "bg-slate-600"}`}
         >
           <div
             className={`h-5 w-5 rounded-full bg-white shadow transition ${active ? "translate-x-5" : ""}`}
@@ -188,7 +188,7 @@ export function RoomDashboard() {
       <aside className="w-full border-t border-slate-700 bg-slate-900/50 lg:w-80 lg:border-l lg:border-t-0">
         <div className="border-b border-slate-700 px-4 py-3">
           <p className="flex items-center gap-2 text-sm font-medium text-slate-300">
-            <Zap className="h-4 w-4 text-indigo-400" />
+            <Zap className="h-4 w-4 text-doora-orange" />
             System logs
           </p>
         </div>

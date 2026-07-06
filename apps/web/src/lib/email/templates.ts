@@ -12,9 +12,9 @@ export function buildOtpEmail(code: string) {
 
   const html = `
     <div style="font-family:system-ui,sans-serif;max-width:480px;margin:0 auto;padding:24px">
-      <h2 style="color:#312e81;margin:0 0 8px">Verify your email</h2>
+      <h2 style="color:#2C3E50;margin:0 0 8px">Verify your email</h2>
       <p style="color:#475569;margin:0 0 20px">Use this code to complete your Doora registration:</p>
-      <div style="font-size:32px;font-weight:700;letter-spacing:8px;color:#4f46e5;padding:16px 20px;background:#eef2ff;border-radius:12px;text-align:center">
+      <div style="font-size:32px;font-weight:700;letter-spacing:8px;color:#E67E22;padding:16px 20px;background:#FDF2E9;border-radius:12px;text-align:center">
         ${code}
       </div>
       <p style="color:#64748b;font-size:14px;margin-top:20px">

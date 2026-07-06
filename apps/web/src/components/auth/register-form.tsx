@@ -86,7 +86,7 @@ export function RegisterForm() {
               name="name"
               required
               defaultValue={details.name}
-              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-doora-orange focus:ring-2 focus:ring-doora-orange/20"
             />
           </div>
           <div className="space-y-2">
@@ -99,7 +99,7 @@ export function RegisterForm() {
               type="email"
               required
               defaultValue={details.email}
-              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-doora-orange focus:ring-2 focus:ring-doora-orange/20"
             />
           </div>
           <div className="space-y-2">
@@ -113,7 +113,7 @@ export function RegisterForm() {
               required
               minLength={6}
               defaultValue={details.password}
-              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-doora-orange focus:ring-2 focus:ring-doora-orange/20"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -126,7 +126,7 @@ export function RegisterForm() {
                 name="tower"
                 placeholder="B"
                 defaultValue={details.tower}
-                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-doora-orange focus:ring-2 focus:ring-doora-orange/20"
               />
             </div>
             <div className="space-y-2">
@@ -138,7 +138,7 @@ export function RegisterForm() {
                 name="apartment"
                 placeholder="1204"
                 defaultValue={details.apartment}
-                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-doora-orange focus:ring-2 focus:ring-doora-orange/20"
               />
             </div>
           </div>
@@ -146,7 +146,7 @@ export function RegisterForm() {
           <button
             type="submit"
             disabled={startPending}
-            className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+            className="w-full rounded-lg bg-doora-orange px-4 py-2.5 text-sm font-medium text-white hover:bg-doora-orange-dark disabled:opacity-60"
           >
             {startPending ? "Sending code..." : "Continue with email verification"}
           </button>
@@ -157,7 +157,7 @@ export function RegisterForm() {
               if (form) captureDetails(form);
               setManualOtpStep(true);
             }}
-            className="w-full text-sm text-indigo-600 hover:underline"
+            className="w-full text-sm text-doora-orange hover:underline"
           >
             I already received my code
           </button>
@@ -204,13 +204,13 @@ export function RegisterForm() {
                 maxLength={6}
                 required
                 placeholder="123456"
-                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-center text-lg tracking-[0.4em] outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-center text-lg tracking-[0.4em] outline-none focus:border-doora-orange focus:ring-2 focus:ring-doora-orange/20"
               />
             </div>
             <button
               type="submit"
               disabled={completePending}
-              className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+              className="w-full rounded-lg bg-doora-orange px-4 py-2.5 text-sm font-medium text-white hover:bg-doora-orange-dark disabled:opacity-60"
             >
               {completePending ? "Creating account..." : "Verify and create account"}
             </button>
@@ -226,7 +226,7 @@ export function RegisterForm() {
             <input type="hidden" name="tower" value={details.tower} />
             <input type="hidden" name="apartment" value={details.apartment} />
             <input type="hidden" name="role" value="RESIDENT" />
-            <button type="submit" className="w-full text-sm text-indigo-600 hover:underline">
+            <button type="submit" className="w-full text-sm text-doora-orange hover:underline">
               Resend code
             </button>
           </form>
@@ -235,7 +235,7 @@ export function RegisterForm() {
 
       <p className="mt-6 text-center text-sm text-slate-500">
         Already have an account?{" "}
-        <Link href="/login" className="font-medium text-indigo-600 hover:underline">
+        <Link href="/login" className="font-medium text-doora-orange hover:underline">
           Sign in
         </Link>
       </p>

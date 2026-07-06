@@ -75,10 +75,10 @@ export function DooraAssistant() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-      <header className="shrink-0 border-b border-violet-500/20 px-6 py-4">
+    <div className="flex h-[calc(100vh-4rem)] flex-col bg-gradient-to-b from-doora-navy-dark via-doora-navy to-doora-navy-dark">
+      <header className="shrink-0 border-b border-doora-navy-light/50 px-6 py-4">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-indigo-500 text-white shadow-lg shadow-violet-600/30">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-doora-orange text-white shadow-lg shadow-doora-orange/30">
             <Sparkles className="h-5 w-5" />
           </span>
           <div>
@@ -98,19 +98,19 @@ export function DooraAssistant() {
               <div
                 className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                   msg.role === "user"
-                    ? "bg-violet-600 text-white"
-                    : "border border-slate-700/60 bg-slate-800/80 text-slate-100"
+                    ? "bg-doora-orange text-white"
+                    : "border border-doora-navy-light/60 bg-doora-navy-light/40 text-slate-100"
                 }`}
               >
                 <p className="whitespace-pre-wrap">{msg.content}</p>
                 {msg.tools && msg.tools.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-1.5 border-t border-slate-600/50 pt-2">
+                  <div className="mt-2 flex flex-wrap gap-1.5 border-t border-doora-navy-muted/50 pt-2">
                     {msg.tools.map((t, j) => (
                       <span
                         key={j}
                         className={`rounded-md px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide ${
                           t.success
-                            ? "bg-emerald-500/20 text-emerald-300"
+                            ? "bg-doora-success/20 text-emerald-300"
                             : "bg-red-500/20 text-red-300"
                         }`}
                       >
@@ -125,8 +125,8 @@ export function DooraAssistant() {
 
           {loading && (
             <div className="flex justify-start">
-              <div className="flex items-center gap-2 rounded-2xl border border-slate-700/60 bg-slate-800/80 px-4 py-3 text-sm text-slate-400">
-                <Loader2 className="h-4 w-4 animate-spin text-violet-400" />
+              <div className="flex items-center gap-2 rounded-2xl border border-doora-navy-light/60 bg-doora-navy-light/40 px-4 py-3 text-sm text-slate-400">
+                <Loader2 className="h-4 w-4 animate-spin text-doora-orange" />
                 Thinking…
               </div>
             </div>
@@ -139,7 +139,7 @@ export function DooraAssistant() {
                   key={s}
                   type="button"
                   onClick={() => sendMessage(s)}
-                  className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs text-violet-200 transition hover:border-violet-400/50 hover:bg-violet-500/20"
+                  className="rounded-full border border-doora-orange/30 bg-doora-orange/10 px-3 py-1.5 text-xs text-doora-orange-soft transition hover:border-doora-orange/50 hover:bg-doora-orange/20"
                 >
                   {s}
                 </button>
@@ -154,7 +154,7 @@ export function DooraAssistant() {
       )}
 
       <form
-        className="shrink-0 border-t border-slate-700/50 p-4"
+        className="shrink-0 border-t border-doora-navy-light/50 p-4"
         onSubmit={(e) => {
           e.preventDefault();
           sendMessage(input);
@@ -167,12 +167,12 @@ export function DooraAssistant() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask Doora anything…"
             disabled={loading}
-            className="flex-1 rounded-xl border border-slate-600/60 bg-slate-800/80 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 disabled:opacity-50"
+            className="flex-1 rounded-xl border border-doora-navy-light/60 bg-doora-navy-light/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-doora-orange/50 focus:outline-none focus:ring-1 focus:ring-doora-orange/30 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-600 text-white shadow-lg shadow-violet-600/25 transition hover:opacity-90 disabled:opacity-40"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-doora-orange text-white shadow-lg shadow-doora-orange/25 transition hover:bg-doora-orange-dark disabled:opacity-40"
             aria-label="Send"
           >
             <Send className="h-5 w-5" />

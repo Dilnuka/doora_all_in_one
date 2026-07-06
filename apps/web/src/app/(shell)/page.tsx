@@ -12,21 +12,21 @@ export default async function HomePage() {
       title: "Food",
       description: "Order from campus cafeterias",
       icon: UtensilsCrossed,
-      color: "bg-orange-100 text-orange-700",
+      color: "bg-doora-orange-soft text-doora-orange-dark",
     },
     {
       href: "/chat",
       title: "Chat",
       description: "Message residents and staff in real time",
       icon: MessageSquare,
-      color: "bg-blue-100 text-blue-700",
+      color: "bg-slate-200 text-doora-navy",
     },
     {
       href: "/room",
       title: "Smart Room",
       description: "Control lights, climate, and routines",
       icon: Zap,
-      color: "bg-emerald-100 text-emerald-700",
+      color: "bg-doora-success-soft text-doora-success",
     },
   ];
 
@@ -46,7 +46,7 @@ export default async function HomePage() {
           <Link
             key={href}
             href={href}
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-indigo-200 hover:shadow-md"
+            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-doora-orange/40 hover:shadow-md"
           >
             <div className={`mb-4 inline-flex rounded-xl p-3 ${color}`}>
               <Icon className="h-5 w-5" />
@@ -57,9 +57,9 @@ export default async function HomePage() {
         ))}
       </div>
 
-      <div className="mt-8 rounded-2xl border border-violet-100 bg-violet-50 p-6">
-        <h2 className="font-semibold text-violet-900">Food + Chat + Room live</h2>
-        <p className="mt-1 text-sm text-violet-700">
+      <div className="mt-8 rounded-2xl border border-doora-orange-soft bg-doora-orange-soft p-6">
+        <h2 className="font-semibold text-doora-navy">Food + Chat + Room live</h2>
+        <p className="mt-1 text-sm text-doora-navy-light">
           Order food, chat in real time, and control your smart room. Doora AI cross-domain tools are next.
         </p>
       </div>

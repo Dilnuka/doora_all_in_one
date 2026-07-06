@@ -131,7 +131,7 @@ export function ChatApp() {
 
   const chatUser = {
     displayName: user.name ?? "User",
-    avatarColor: "#6366f1",
+    avatarColor: "#E67E22",
     avatarId: null as string | null,
     statusMessage: "",
   };

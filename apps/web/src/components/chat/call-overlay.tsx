@@ -20,14 +20,14 @@ function RingingAvatar({
     <div className="relative mx-auto mb-8 h-36 w-36">
       <span
         className={`absolute inset-0 animate-ping rounded-full opacity-30 ${
-          isIncoming ? "bg-emerald-400" : "bg-indigo-400"
+          isIncoming ? "bg-emerald-400" : "bg-doora-orange"
         }`}
       />
       <div
         className={`relative z-10 flex h-full w-full flex-col items-center justify-center rounded-full text-white shadow-2xl ${
           isIncoming
             ? "bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600"
-            : "bg-gradient-to-br from-indigo-400 via-indigo-500 to-violet-600"
+            : "bg-gradient-to-br from-doora-orange via-doora-orange to-doora-navy-dark"
         }`}
       >
         <span className="text-4xl font-bold">{initial}</span>
@@ -135,7 +135,7 @@ export function CallOverlay({
                   variant="outgoing"
                 />
               ) : (
-                <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-violet-600 shadow-xl">
+                <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-doora-orange to-doora-navy-dark shadow-xl">
                   <span className="text-3xl font-bold text-white">
                     {activeCall.targetName?.[0]?.toUpperCase() || "?"}
                   </span>

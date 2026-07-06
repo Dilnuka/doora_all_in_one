@@ -65,7 +65,7 @@ export function SmartRoutinesModal({
                     runRoutine(r.actions as Record<string, string | number>);
                     onClose();
                   }}
-                  className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-40"
+                  className="flex items-center gap-1.5 rounded-lg bg-doora-orange px-3 py-1.5 text-sm font-medium text-white hover:bg-doora-orange-dark disabled:opacity-40"
                 >
                   <Play className="h-4 w-4" />
                   Run

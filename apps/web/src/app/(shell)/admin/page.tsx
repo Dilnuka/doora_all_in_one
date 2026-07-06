@@ -13,14 +13,14 @@ export default async function AdminPage() {
         <div className="rounded-xl border border-slate-200 bg-white p-5">
           <p className="text-sm text-slate-500">Signed in as</p>
           <p className="mt-1 font-medium">{user.email}</p>
-          <p className="text-sm text-indigo-600">{user.role}</p>
+          <p className="text-sm text-doora-orange">{user.role}</p>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white p-5">
           <p className="text-sm text-slate-500">Auth & email</p>
           <ul className="mt-2 space-y-1 text-sm text-slate-700">
             <li>OTP email verification on signup</li>
             <li>
-              <a href="/admin/emails" className="text-indigo-600 hover:underline">
+              <a href="/admin/emails" className="text-doora-orange hover:underline">
                 View email delivery logs
               </a>
             </li>

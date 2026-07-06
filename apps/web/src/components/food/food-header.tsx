@@ -8,11 +8,11 @@ export async function FoodHeader() {
   const role = session?.user?.role;
 
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 bg-white/95 px-6 py-3 backdrop-blur">
+    <header className="sticky top-0 z-30 flex items-center justify-between border-b border-doora-border bg-doora-surface-card/95 px-6 py-3 backdrop-blur">
       <div>
         <h1 className="text-lg font-semibold text-slate-900">Food</h1>
         {role === "CAFETERIA" && (
-          <Link href="/food/dashboard" className="text-xs text-orange-600 hover:underline">
+          <Link href="/food/dashboard" className="text-xs text-doora-orange hover:underline">
             Open cafeteria dashboard →
           </Link>
         )}

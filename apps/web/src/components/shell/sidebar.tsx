@@ -35,8 +35,8 @@ export function Sidebar({ user }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-64 flex-col bg-slate-900 text-slate-200">
-      <div className="border-b border-slate-800 px-5 py-5">
+    <aside className="flex h-screen w-64 flex-col bg-doora-navy text-slate-200">
+      <div className="border-b border-doora-navy-light px-5 py-5">
         <p className="text-lg font-semibold text-white">Doora</p>
         <p className="text-xs text-slate-400">Unified Platform</p>
       </div>
@@ -51,8 +51,8 @@ export function Sidebar({ user }: SidebarProps) {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                 active
-                  ? "bg-indigo-600 text-white"
-                  : "text-slate-300 hover:bg-slate-800 hover:text-white",
+                  ? "bg-doora-orange text-white shadow-sm"
+                  : "text-slate-300 hover:bg-doora-navy-light hover:text-white",
               )}
             >
               <Icon className="h-4 w-4" />
@@ -66,8 +66,8 @@ export function Sidebar({ user }: SidebarProps) {
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
               pathname.startsWith("/admin")
-                ? "bg-indigo-600 text-white"
-                : "text-slate-300 hover:bg-slate-800 hover:text-white",
+                ? "bg-doora-orange text-white shadow-sm"
+                : "text-slate-300 hover:bg-doora-navy-light hover:text-white",
             )}
           >
             <LayoutDashboard className="h-4 w-4" />
@@ -76,16 +76,16 @@ export function Sidebar({ user }: SidebarProps) {
         )}
       </nav>
 
-      <div className="border-t border-slate-800 p-4">
+      <div className="border-t border-doora-navy-light p-4">
         <div className="mb-3 truncate">
           <p className="text-sm font-medium text-white">{user.name}</p>
           <p className="truncate text-xs text-slate-400">{user.email}</p>
-          <p className="mt-1 text-xs text-indigo-300">{user.role}</p>
+          <p className="mt-1 text-xs text-doora-orange">{user.role}</p>
         </div>
         <form action={logoutAction}>
           <button
             type="submit"
-            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-white"
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-doora-navy-light hover:text-white"
           >
             <LogOut className="h-4 w-4" />
             Sign out

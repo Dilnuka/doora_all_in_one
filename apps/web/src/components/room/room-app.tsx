@@ -49,10 +49,10 @@ function RoomShell() {
         <h2 className="text-xl font-semibold text-white">No room assigned</h2>
         <p className="mt-2 max-w-md text-slate-400">
           Your account doesn&apos;t have a smart room linked yet. Try the demo guest account{" "}
-          <code className="text-indigo-400">guest@doora.local</code> /{" "}
-          <code className="text-indigo-400">guest123</code>.
+          <code className="text-doora-orange">guest@doora.local</code> /{" "}
+          <code className="text-doora-orange">guest123</code>.
         </p>
-        <Link href="/" className="mt-6 text-indigo-400 hover:underline">
+        <Link href="/" className="mt-6 text-doora-orange hover:underline">
           Back to home
         </Link>
       </div>
@@ -62,7 +62,7 @@ function RoomShell() {
   if (!isHydrated) {
     return (
       <div className="flex h-full items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-indigo-500 border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-doora-orange border-t-transparent" />
       </div>
     );
   }
@@ -100,7 +100,7 @@ function RoomShell() {
           </button>
           <Link
             href="/doora"
-            className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
+            className="rounded-lg bg-doora-orange px-3 py-1.5 text-sm font-medium text-white hover:bg-doora-orange-dark"
           >
             Ask Doora
           </Link>

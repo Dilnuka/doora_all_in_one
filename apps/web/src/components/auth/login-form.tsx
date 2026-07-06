@@ -59,7 +59,7 @@ export function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
             type="email"
             required
             placeholder="you@example.com"
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-doora-orange focus:ring-2 focus:ring-doora-orange/20"
           />
         </div>
         <div className="space-y-2">
@@ -72,20 +72,20 @@ export function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
             type="password"
             required
             placeholder="••••••••"
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-doora-orange focus:ring-2 focus:ring-doora-orange/20"
           />
         </div>
         <button
           type="submit"
           disabled={pending}
-          className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+          className="w-full rounded-lg bg-doora-orange px-4 py-2.5 text-sm font-medium text-white hover:bg-doora-orange-dark disabled:opacity-60"
         >
           {pending ? "Signing in..." : "Sign in"}
         </button>
       </form>
       <p className="mt-6 text-center text-sm text-slate-500">
         No account?{" "}
-        <Link href="/register" className="font-medium text-indigo-600 hover:underline">
+        <Link href="/register" className="font-medium text-doora-orange hover:underline">
           Register
         </Link>
       </p>

@@ -51,7 +51,7 @@ function getNextLabel(status: OrderStatus, deliveryType: DeliveryType) {
 const STATUS_STYLES: Record<OrderStatus, string> = {
   PENDING: "bg-amber-100 text-amber-700",
   PREPARING: "bg-blue-100 text-blue-700",
-  READY: "bg-violet-100 text-violet-700",
+  READY: "bg-doora-orange-soft text-doora-navy-light",
   OUT_FOR_DELIVERY: "bg-sky-100 text-sky-700",
   DELIVERED: "bg-emerald-100 text-emerald-700",
   CANCELLED: "bg-red-100 text-red-600",

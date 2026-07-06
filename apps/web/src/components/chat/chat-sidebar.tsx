@@ -59,8 +59,8 @@ export function ChatSidebar({
   );
 
   return (
-    <div className="flex h-full w-full shrink-0 flex-col border-r border-slate-700/50 bg-slate-800 md:w-80 lg:w-96">
-      <div className="border-b border-slate-700/50 p-4">
+    <div className="flex h-full w-full shrink-0 flex-col border-r border-doora-navy-light/50 bg-doora-navy md:w-80 lg:w-96">
+      <div className="border-b border-doora-navy-light/50 p-4">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex min-w-0 items-center gap-3">
             <ChatAvatar
@@ -81,7 +81,7 @@ export function ChatSidebar({
           </div>
           <Link
             href="/doora"
-            className="rounded-lg p-2 text-slate-400 hover:bg-slate-700/50 hover:text-white"
+            className="rounded-lg p-2 text-slate-400 hover:bg-doora-navy-light/50 hover:text-white"
             title="Doora AI"
           >
             <Bot className="h-5 w-5" />
@@ -92,27 +92,27 @@ export function ChatSidebar({
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search..."
-          className="w-full rounded-xl border border-slate-600/50 bg-slate-900 px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+          className="w-full rounded-xl border border-doora-navy-light/50 bg-doora-navy-dark px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-doora-orange/50"
         />
       </div>
 
-      <div className="flex border-b border-slate-700/50">
+      <div className="flex border-b border-doora-navy-light/50">
         <button
           onClick={() => setTab("chats")}
           className={`flex flex-1 items-center justify-center gap-2 py-3 text-sm font-medium ${
-            tab === "chats" ? "border-b-2 border-indigo-500 text-white" : "text-slate-400"
+            tab === "chats" ? "border-b-2 border-doora-orange text-white" : "text-slate-400"
           }`}
         >
           <MessageSquare className="h-4 w-4" />
           Chats
           {totalUnread > 0 && (
-            <span className="rounded-full bg-indigo-600 px-1.5 text-xs">{totalUnread}</span>
+            <span className="rounded-full bg-doora-orange px-1.5 text-xs">{totalUnread}</span>
           )}
         </button>
         <button
           onClick={() => setTab("contacts")}
           className={`flex flex-1 items-center justify-center gap-2 py-3 text-sm font-medium ${
-            tab === "contacts" ? "border-b-2 border-indigo-500 text-white" : "text-slate-400"
+            tab === "contacts" ? "border-b-2 border-doora-orange text-white" : "text-slate-400"
           }`}
         >
           <Users className="h-4 w-4" />
@@ -129,8 +129,8 @@ export function ChatSidebar({
               <button
                 key={conv.id}
                 onClick={() => onSelectConversation(conv)}
-                className={`flex w-full items-center gap-3 border-b border-slate-700/30 p-4 text-left transition hover:bg-slate-700/20 ${
-                  activeConversationId === conv.id ? "bg-slate-700/40" : ""
+                className={`flex w-full items-center gap-3 border-b border-doora-navy-light/30 p-4 text-left transition hover:bg-doora-navy-light/20 ${
+                  activeConversationId === conv.id ? "bg-doora-navy-light/40" : ""
                 }`}
               >
                 <ChatAvatar
@@ -153,7 +153,7 @@ export function ChatSidebar({
                   </p>
                 </div>
                 {conv.unreadCount > 0 && (
-                  <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-indigo-600 px-1 text-xs font-bold text-white">
+                  <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-doora-orange px-1 text-xs font-bold text-white">
                     {conv.unreadCount}
                   </span>
                 )}
@@ -165,7 +165,7 @@ export function ChatSidebar({
             <div className="p-3">
               <button
                 onClick={onAddContact}
-                className="w-full rounded-xl bg-indigo-600 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                className="w-full rounded-xl bg-doora-orange py-2 text-sm font-medium text-white hover:bg-doora-orange-dark"
               >
                 + Add contact
               </button>
